@@ -1,0 +1,28 @@
+---
+title: "React Islands with Astro"
+description: "Using the Islands Architecture to ship interactive React components with zero overhead."
+pubDate: 2024-03-05
+tags: ["astro", "react", "islands"]
+---
+
+import ThemeToggle from '../../components/ThemeToggle';
+
+## Islands Architecture
+
+With Astro, you can use **any** UI framework — React, Vue, Svelte, Solid — for individual interactive components. The rest of the page is static HTML.
+
+## The Theme Toggle
+
+This site includes a small React Island: a dark/light mode toggle. Here it is rendered inline:
+
+<ThemeToggle client:load />
+
+The `client:load` directive tells Astro to hydrate this component immediately on page load. Other options include:
+
+| Directive | When it hydrates |
+| --- | --- |
+| `client:load` | Immediately |
+| `client:idle` | When the browser is idle |
+| `client:visible` | When the component scrolls into view |
+
+This granular control means you ship exactly as much JavaScript as you need — no more, no less.

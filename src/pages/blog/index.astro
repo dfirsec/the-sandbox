@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<BaseLayout title="Blog" description="Articles from the-sandbox developer playground.">
+  <h1 class="text-4xl font-extrabold mb-8">Blog</h1>
+
+  {posts.length === 0 ? (
+    <p class="text-gray-500 dark:text-gray-400">No posts yet — check back soon!</p>
+  ) : (
+    <ul class="space-y-6">
+      {posts.map((post) => (
+        <li class="rounded-xl border border-gray-200 dark:border-gray-800 p-6 hover:shadow-md transition-shadow">
+          <a href={`${base}/blog/${post.slug}`} class="group">
+            <h2 class="text-xl font-bold group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+              {post.data.title}
+            </h2>
+            <p class="text-gray-600 dark:text-gray-300 mt-1 text-sm">{post.data.description}</p>
+            <div class="flex items-center gap-4 mt-3">
+              <time class="text-xs text-gray-400 dark:text-gray-500">
+                {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </time>
+              {post.data.tags && post.data.tags.map((tag: string) => (
+                <span class="text-xs bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded px-2 py-0.5">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )}
+</BaseLayout>
