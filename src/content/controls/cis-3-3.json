@@ -1,0 +1,7 @@
+{
+    "controlId": "CIS 3.3",
+    "cisGroup": "Data Protection",
+    "title": "Configure Data Access Control Lists",
+    "implementationStatus": "Partial",
+    "notes": "SharePoint and OneDrive ACLs reviewed quarterly. File server permissions audited annually. CASB policy enforces external sharing restrictions but does not yet cover all SaaS applications."
+}

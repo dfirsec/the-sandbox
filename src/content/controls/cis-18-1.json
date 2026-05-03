@@ -1,0 +1,7 @@
+{
+    "controlId": "CIS 18.1",
+    "cisGroup": "Penetration Testing",
+    "title": "Establish and Maintain a Penetration Testing Program",
+    "implementationStatus": "Partial",
+    "notes": "Annual external penetration test conducted by third-party firm. Internal red team capability not yet established. Last external test: Q1 2026. Findings tracked in Jira with remediation owners assigned."
+}

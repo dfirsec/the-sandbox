@@ -1,0 +1,7 @@
+{
+    "controlId": "CIS 7.1",
+    "cisGroup": "Continuous Vulnerability Management",
+    "title": "Establish and Maintain a Vulnerability Management Process",
+    "implementationStatus": "Implemented",
+    "notes": "Tenable.io performs weekly authenticated scans across all in-scope assets. Critical and High findings tracked in Jira with SLA enforcement. CISA KEV catalog cross-referenced monthly."
+}

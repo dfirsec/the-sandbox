@@ -1,0 +1,9 @@
+{
+    "name": "FBI Cyber Division",
+    "type": "External",
+    "role": "Law enforcement contact for criminal cyber incidents: ransomware, nation-state intrusion, financial fraud, and intellectual property theft.",
+    "phone": "+1-855-292-3937",
+    "email": "ic3.gov",
+    "priority": "P1",
+    "notes": "File complaints at https://ic3.gov. Contact your local FBI field office for active ongoing intrusions — they can provide faster response than the national hotline. Coordinate with Legal before engagement."
+}

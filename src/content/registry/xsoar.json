@@ -1,0 +1,8 @@
+{
+    "toolName": "Palo Alto XSOAR",
+    "category": "SOAR",
+    "status": "Active",
+    "url": "https://xsoar.pan.dev",
+    "internalOwner": "SOC Engineering Team",
+    "notes": "Orchestrates phishing triage, alert enrichment, and EDR isolation playbooks. Integrated with CrowdStrike, Splunk, IronPort, and Entra ID. Average alert-to-action time: 4 minutes for automated playbooks."
+}

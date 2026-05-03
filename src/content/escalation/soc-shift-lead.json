@@ -1,0 +1,9 @@
+{
+    "name": "SOC Shift Lead",
+    "type": "Internal",
+    "role": "First internal escalation point for P2/P3 alerts requiring senior analyst review.",
+    "phone": "+1-555-0102",
+    "email": "soc-lead@company.internal",
+    "priority": "P2",
+    "notes": "Available during shift hours. For off-hours P2, use the on-call rotation in PagerDuty."
+}

@@ -1,0 +1,8 @@
+{
+    "name": "Splunk Support",
+    "type": "Vendor",
+    "role": "SIEM platform support for critical indexing failures, license issues, or search head cluster outages.",
+    "email": "support@splunk.com",
+    "priority": "P2",
+    "notes": "Open cases via Splunk Support Portal. P1 cases include 24/7 phone support callback. Reference your Splunk Cloud instance ID."
+}

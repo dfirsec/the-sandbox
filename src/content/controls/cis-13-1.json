@@ -1,0 +1,7 @@
+{
+    "controlId": "CIS 13.1",
+    "cisGroup": "Network Monitoring and Defense",
+    "title": "Centralize Security Event Alerting",
+    "implementationStatus": "Implemented",
+    "notes": "Splunk SIEM aggregates logs from firewalls, EDR, identity, email gateway, and cloud providers. Correlation rules maintained by detection engineering. MTTD target: <4 hours for High severity events."
+}

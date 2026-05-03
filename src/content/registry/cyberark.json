@@ -1,0 +1,8 @@
+{
+    "toolName": "CyberArk PAM",
+    "category": "Privileged Access Management",
+    "status": "Active",
+    "url": "https://cyberark.com",
+    "internalOwner": "Identity & Access Management Team",
+    "notes": "Vaults all shared privileged credentials and service account passwords. Session recording enabled for all Tier 0 and Tier 1 privileged sessions. PSM used for jump server access."
+}

@@ -1,0 +1,7 @@
+{
+    "controlId": "CIS 2.1",
+    "cisGroup": "Inventory and Control of Software Assets",
+    "title": "Establish and Maintain a Software Inventory",
+    "implementationStatus": "Partial",
+    "notes": "Server-side software tracked via Tenable. Endpoint applications captured by CrowdStrike but not centrally normalized into a searchable CMDB."
+}

@@ -1,0 +1,7 @@
+{
+    "controlId": "CIS 11.1",
+    "cisGroup": "Data Recovery",
+    "title": "Establish and Maintain a Data Recovery Process",
+    "implementationStatus": "Partial",
+    "notes": "Veeam performs nightly backups of all Tier 1 servers to immutable Azure Blob storage. Recovery runbooks exist but have not been tested via a full DR exercise in the past 18 months."
+}

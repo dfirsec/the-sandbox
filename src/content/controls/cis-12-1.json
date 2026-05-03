@@ -1,0 +1,7 @@
+{
+    "controlId": "CIS 12.1",
+    "cisGroup": "Network Infrastructure Management",
+    "title": "Ensure Network Infrastructure is Up-to-Date",
+    "implementationStatus": "Partial",
+    "notes": "Palo Alto firewalls on current PAN-OS release. Core switches on supported firmware. Distribution and access layer switches have 14 devices running EOS firmware pending change window approval."
+}

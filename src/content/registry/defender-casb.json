@@ -1,0 +1,8 @@
+{
+    "toolName": "Microsoft Defender for Cloud Apps",
+    "category": "CASB",
+    "status": "Active",
+    "url": "https://security.microsoft.com",
+    "internalOwner": "Cloud Security Team",
+    "notes": "Provides SaaS visibility, DLP policy enforcement, and OAuth app governance. Connected to Entra ID for conditional access integration. Shadow IT discovery enabled via Palo Alto log upload."
+}

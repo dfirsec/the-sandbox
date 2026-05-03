@@ -1,0 +1,9 @@
+{
+    "name": "Legal Counsel",
+    "type": "Internal",
+    "role": "Required for breach notification decisions, law enforcement referrals, insider threat investigations, and any incident with potential litigation exposure.",
+    "phone": "+1-555-0103",
+    "email": "legal@company.internal",
+    "priority": "P1",
+    "notes": "Engage Legal before making any public statement about an incident. All communications may be subject to attorney-client privilege once Legal is engaged."
+}

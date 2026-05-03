@@ -1,0 +1,7 @@
+{
+    "controlId": "CIS 16.1",
+    "cisGroup": "Application Software Security",
+    "title": "Establish and Maintain a Secure Application Development Process",
+    "implementationStatus": "Partial",
+    "notes": "SAST tooling (Semgrep) integrated into CI/CD pipelines for internal applications. SCA (Dependabot) enabled on all GitHub repos. DAST and penetration testing performed annually on externally-facing applications."
+}

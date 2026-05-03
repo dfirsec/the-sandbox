@@ -1,0 +1,9 @@
+{
+    "name": "Incident Response Lead",
+    "type": "Internal",
+    "role": "Primary IR decision-maker and incident commander for all P1/P2 events.",
+    "phone": "+1-555-0100",
+    "email": "ir-lead@company.internal",
+    "priority": "P1",
+    "notes": "Page immediately for any Critical severity incident. Available 24/7 on-call."
+}

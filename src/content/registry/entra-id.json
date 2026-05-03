@@ -1,0 +1,8 @@
+{
+    "toolName": "Microsoft Entra ID",
+    "category": "Identity Provider",
+    "status": "Active",
+    "url": "https://entra.microsoft.com",
+    "internalOwner": "Identity & Access Management Team",
+    "notes": "Primary IdP for all corporate identities. SSO, MFA (Authenticator + FIDO2), and Conditional Access policies enforced. PIM enabled for privileged roles."
+}

@@ -1,0 +1,72 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/BaseLayout.astro";
+
+const priorityOrder: Record<string, number> = { P1: 0, P2: 1, P3: 2, Any: 3 };
+const typeOrder: Record<string, number> = { Internal: 0, Vendor: 1, External: 2 };
+
+const contacts = (await getCollection("escalation")).sort((a, b) => {
+    const typeDiff = (typeOrder[a.data.type] ?? 9) - (typeOrder[b.data.type] ?? 9);
+    if (typeDiff !== 0) return typeDiff;
+    return (priorityOrder[a.data.priority] ?? 9) - (priorityOrder[b.data.priority] ?? 9);
+});
+
+const priorityStyles: Record<string, string> = {
+    P1: "bg-red-900 text-red-200",
+    P2: "bg-orange-900 text-orange-200",
+    P3: "bg-yellow-900 text-yellow-200",
+    Any: "bg-slate-700 text-slate-300",
+};
+
+const grouped = contacts.reduce<Record<string, typeof contacts>>((acc, c) => {
+    const key = c.data.type;
+    if (!acc[key]) acc[key] = [];
+    acc[key].push(c);
+    return acc;
+}, {});
+---
+
+<Layout title="Escalation Directory | SOC Portal">
+    <main class="max-w-5xl mx-auto px-6 py-12 text-slate-300">
+        <h1 class="text-3xl font-bold text-white border-b border-slate-700 pb-4 mb-2">
+            Escalation Directory
+        </h1>
+        <p class="text-sm text-slate-500 mb-8 font-mono">
+            Use P1 contacts immediately for active Critical incidents. Always coordinate with Legal before external government engagement.
+        </p>
+
+        {Object.entries(grouped).map(([type, entries]) => (
+            <section class="mb-10">
+                <h2 class="text-lg font-bold text-slate-200 font-mono mb-4 uppercase tracking-widest border-b border-slate-800 pb-2">
+                    {type}
+                </h2>
+                <div class="grid gap-4">
+                    {entries.map((contact) => (
+                        <div class="p-4 border border-slate-700 bg-slate-900">
+                            <div class="flex justify-between items-start gap-4 mb-2">
+                                <h3 class="text-white font-semibold">{contact.data.name}</h3>
+                                <span class={`px-2 py-0.5 text-xs font-bold uppercase shrink-0 ${priorityStyles[contact.data.priority]}`}>
+                                    {contact.data.priority}
+                                </span>
+                            </div>
+                            <p class="text-sm text-slate-400 mb-3">{contact.data.role}</p>
+                            <div class="flex flex-wrap gap-4 text-sm font-mono">
+                                {contact.data.phone && (
+                                    <span class="text-emerald-400">&#x260E; {contact.data.phone}</span>
+                                )}
+                                {contact.data.email && (
+                                    <span class="text-blue-400">&#x2709; {contact.data.email}</span>
+                                )}
+                            </div>
+                            {contact.data.notes && (
+                                <p class="mt-3 text-xs text-slate-500 border-t border-slate-800 pt-3">
+                                    {contact.data.notes}
+                                </p>
+                            )}
+                        </div>
+                    ))}
+                </div>
+            </section>
+        ))}
+    </main>
+</Layout>

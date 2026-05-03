@@ -1,0 +1,9 @@
+{
+    "name": "CISO",
+    "type": "Internal",
+    "role": "Executive notification for Critical incidents, regulatory breach decisions, and law enforcement engagement.",
+    "phone": "+1-555-0101",
+    "email": "ciso@company.internal",
+    "priority": "P1",
+    "notes": "Notify within 15 minutes of any P1 declaration. Do not contact directly for P2 or below — escalate through IR Lead."
+}

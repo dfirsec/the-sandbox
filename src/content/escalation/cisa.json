@@ -1,0 +1,9 @@
+{
+    "name": "CISA (Cybersecurity and Infrastructure Security Agency)",
+    "type": "External",
+    "role": "Federal cybersecurity agency — voluntary incident reporting, threat intelligence sharing, and technical assistance for significant cyber incidents.",
+    "phone": "+1-888-282-0870",
+    "email": "report@cisa.gov",
+    "priority": "P1",
+    "notes": "Report significant incidents via https://myreport.cisa.gov. CISA can provide no-cost technical assistance and threat intelligence. Coordinate with Legal before any government reporting."
+}

@@ -1,0 +1,7 @@
+{
+    "controlId": "CIS 14.1",
+    "cisGroup": "Security Awareness and Skills Training",
+    "title": "Establish and Maintain a Security Awareness Program",
+    "implementationStatus": "Implemented",
+    "notes": "Annual security awareness training mandatory for all employees via KnowBe4. Monthly simulated phishing campaigns. Targeted training assigned automatically to users who fail phishing simulations."
+}

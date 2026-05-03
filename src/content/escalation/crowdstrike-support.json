@@ -1,0 +1,9 @@
+{
+    "name": "CrowdStrike Support",
+    "type": "Vendor",
+    "role": "EDR technical support and Emergency IR retainer activation.",
+    "phone": "+1-877-934-2568",
+    "email": "support@crowdstrike.com",
+    "priority": "P1",
+    "notes": "Reference your account CID when calling. For active breaches with an IR retainer, request the Emergency IR team directly. Portal: https://supportportal.crowdstrike.com"
+}

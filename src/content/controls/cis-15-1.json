@@ -1,0 +1,7 @@
+{
+    "controlId": "CIS 15.1",
+    "cisGroup": "Service Provider Management",
+    "title": "Establish and Maintain an Inventory of Service Providers",
+    "implementationStatus": "Partial",
+    "notes": "Critical vendor inventory maintained in procurement system. Third-party risk assessments completed for Tier 1 vendors annually. Tier 2 and Tier 3 vendors lack formal risk ratings."
+}

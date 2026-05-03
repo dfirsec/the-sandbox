@@ -1,0 +1,7 @@
+{
+    "controlId": "CIS 9.2",
+    "cisGroup": "Email and Web Browser Protections",
+    "title": "Use DNS Filtering Services",
+    "implementationStatus": "Implemented",
+    "notes": "Cisco Umbrella enforces DNS-layer filtering for all on-network and VPN-connected devices. Category blocks include malware, phishing, C2, and adult content. DNS logs ingested into Splunk."
+}

@@ -2,7 +2,25 @@
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/BaseLayout.astro";
 
-const playbooks = await getCollection("playbooks");
+const severityOrder: Record<string, number> = {
+    Critical: 0,
+    High: 1,
+    Medium: 2,
+    Low: 3,
+};
+
+const severityStyles: Record<string, string> = {
+    Critical: "bg-red-900 text-red-200",
+    High: "bg-orange-900 text-orange-200",
+    Medium: "bg-yellow-900 text-yellow-200",
+    Low: "bg-slate-700 text-slate-300",
+};
+
+const playbooks = (await getCollection("playbooks")).sort(
+    (a, b) =>
+        (severityOrder[a.data.severity] ?? 9) -
+        (severityOrder[b.data.severity] ?? 9),
+);
 ---
 
 <Layout title="IR Playbooks | SOC Portal">
@@ -17,20 +35,14 @@ const playbooks = await getCollection("playbooks");
                 playbooks.map((book) => (
                     <a
                         href={`${import.meta.env.BASE_URL}/playbooks/${book.id}`}
-                        class="block p-4 border border-slate-700 hover:border-blue-500 bg-slate-900"
+                        class="block p-4 border border-slate-700 hover:border-blue-500 bg-slate-900 transition-colors"
                     >
                         <div class="flex justify-between items-center mb-2">
                             <h2 class="text-xl font-semibold text-white">
                                 {book.data.title}
                             </h2>
                             <span
-                                class={`px-2 py-1 text-xs font-bold uppercase ${
-                                    book.data.severity === "Critical"
-                                        ? "bg-red-900 text-red-200"
-                                        : book.data.severity === "High"
-                                          ? "bg-orange-900 text-orange-200"
-                                          : "bg-slate-700 text-slate-300"
-                                }`}
+                                class={`px-2 py-1 text-xs font-bold uppercase shrink-0 ml-4 ${severityStyles[book.data.severity] ?? severityStyles.Low}`}
                             >
                                 {book.data.severity}
                             </span>
@@ -38,9 +50,10 @@ const playbooks = await getCollection("playbooks");
                         <p class="text-sm text-slate-400">
                             {book.data.description}
                         </p>
-                        <div class="text-xs text-slate-500 mt-4">
-                            Last Updated:{" "}
+                        <div class="text-xs text-slate-500 mt-4 font-mono">
+                            Updated:{" "}
                             {book.data.lastUpdated.toISOString().split("T")[0]}
+                            &nbsp;&bull;&nbsp;{book.data.author}
                         </div>
                     </a>
                 ))
