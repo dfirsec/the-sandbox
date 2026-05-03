@@ -1,30 +1,60 @@
 ---
-import Layout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+// Ensure this matches your actual layout name
+import Layout from '../../layouts/BaseLayout.astro';
+
+// Fetch all JSON files from the portfolio collection
+const projects = await getCollection('portfolio');
 ---
 
-<Layout title="The Sandbox">
-  <main class="max-w-4xl mx-auto px-6 py-20">
-    <div class="border-l-4 border-sandbox-accent pl-6 py-4 bg-sandbox-accent/5 rounded-r-lg">
-      <h1 class="text-6xl font-black uppercase tracking-tighter">
-        The Sandbox <span class="animate-pulse text-sandbox-accent">_</span>
+<Layout title="Project Lab | The Sandbox">
+  <main class="max-w-5xl mx-auto px-6 py-12">
+    <div class="mb-12 border-b border-slate-800 pb-4">
+      <h1 class="text-4xl font-black font-mono text-sandbox-accent uppercase tracking-tighter">
+        Project Lab <span class="animate-pulse">_</span>
       </h1>
-      <p class="mt-2 text-xl text-slate-400 font-mono italic">
-        // Digital Forensics & Incident Response Laboratory
-      </p>
+      <p class="text-slate-400 mt-2">Active deployments, scripts, and static site templates.</p>
     </div>
 
-    <section class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div class="p-6 border border-sandbox-border hover:border-sandbox-accent transition-colors group">
-        <h2 class="text-2xl font-bold mb-2 group-hover:text-sandbox-accent">Research Blog</h2>
-        <p class="text-slate-400 mb-4">Deep dives into forensic artifacts and malware analysis.</p>
-        <a href={`${import.meta.env.BASE_URL}/blog`} class="text-sm font-mono uppercase tracking-widest text-sandbox-accent">Access Terminal -></a>
-      </div>
+    <!-- The Grid Layout -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {projects.map((project) => (
+        <div class="flex flex-col p-6 border border-slate-800 hover:border-sandbox-accent transition-colors bg-slate-900/50 group relative">
 
-      <div class="p-6 border border-sandbox-border hover:border-sandbox-accent transition-colors group">
-        <h2 class="text-2xl font-bold mb-2 group-hover:text-sandbox-accent">Project Lab</h2>
-        <p class="text-slate-400 mb-4">A collection of automation tools and security scripts.</p>
-        <a href={`${import.meta.env.BASE_URL}/portfolio`} class="text-sm font-mono uppercase tracking-widest text-sandbox-accent">View Reports -></a>
-      </div>
-    </section>
+          <!-- Project Title & Description -->
+          <h2 class="text-2xl font-bold text-white mb-2 group-hover:text-sandbox-accent transition-colors">
+            {project.data.title}
+          </h2>
+          <p class="text-slate-400 mb-6 flex-grow">
+            {project.data.description}
+          </p>
+
+          <!-- Technologies Tags (Only renders if technologies exist in the JSON) -->
+          {project.data.technologies && (
+            <div class="flex flex-wrap gap-2 mb-6">
+              {project.data.technologies.map((tech) => (
+                <span class="px-2 py-1 bg-slate-800 text-xs font-mono text-sandbox-text rounded border border-slate-700">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          )}
+
+          <!-- External Link -->
+          <a
+            href={project.data.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-block mt-auto text-sm font-mono text-sandbox-accent uppercase tracking-widest hover:text-white transition-colors"
+          >
+            [ Launch Tool ]
+          </a>
+
+          <!-- Decorative corner accents -->
+          <div class="absolute top-0 right-0 w-2 h-2 border-t border-r border-slate-500 opacity-50"></div>
+          <div class="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-slate-500 opacity-50"></div>
+        </div>
+      ))}
+    </div>
   </main>
 </Layout>
