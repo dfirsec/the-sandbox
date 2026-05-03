@@ -52,10 +52,10 @@ const grouped = contacts.reduce<Record<string, typeof contacts>>((acc, c) => {
                             <p class="text-sm text-slate-400 mb-3">{contact.data.role}</p>
                             <div class="flex flex-wrap gap-4 text-sm font-mono">
                                 {contact.data.phone && (
-                                    <span class="text-emerald-400">&#x260E; {contact.data.phone}</span>
+                                    <span class="text-emerald-400">📞 {contact.data.phone}</span>
                                 )}
                                 {contact.data.email && (
-                                    <span class="text-blue-400">&#x2709; {contact.data.email}</span>
+                                    <span class="text-blue-400">✉️ {contact.data.email}</span>
                                 )}
                             </div>
                             {contact.data.notes && (
