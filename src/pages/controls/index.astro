@@ -1,0 +1,70 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/BaseLayout.astro";
+
+// Sort controls alphabetically/numerically by their ID
+const controls = (await getCollection("controls")).sort((a, b) =>
+    a.data.controlId.localeCompare(b.data.controlId),
+);
+---
+
+<Layout title="CIS Controls | SOC Portal">
+    <main class="max-w-6xl mx-auto px-6 py-12 text-slate-300">
+        <h1
+            class="text-3xl font-bold text-white border-b border-slate-700 pb-4 mb-8"
+        >
+            CIS Controls Implementation
+        </h1>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr
+                        class="bg-slate-800 text-slate-200 text-sm uppercase tracking-wider"
+                    >
+                        <th class="p-4 border-b border-slate-700 w-24">ID</th>
+                        <th class="p-4 border-b border-slate-700 w-1/3"
+                            >Title</th
+                        >
+                        <th class="p-4 border-b border-slate-700 w-32"
+                            >Status</th
+                        >
+                        <th class="p-4 border-b border-slate-700">Notes</th>
+                    </tr>
+                </thead>
+                <tbody class="text-sm">
+                    {
+                        controls.map((ctrl) => (
+                            <tr class="hover:bg-slate-800/50 border-b border-slate-800">
+                                <td class="p-4 font-mono text-blue-400">
+                                    {ctrl.data.controlId}
+                                </td>
+                                <td class="p-4 font-medium text-white">
+                                    {ctrl.data.title}
+                                </td>
+                                <td class="p-4">
+                                    <span
+                                        class={`px-2 py-1 rounded text-xs font-bold uppercase ${
+                                            ctrl.data.implementationStatus ===
+                                            "Implemented"
+                                                ? "bg-green-900 text-green-200"
+                                                : ctrl.data
+                                                        .implementationStatus ===
+                                                    "Partial"
+                                                  ? "bg-yellow-900 text-yellow-200"
+                                                  : "bg-red-900 text-red-200"
+                                        }`}
+                                    >
+                                        {ctrl.data.implementationStatus}
+                                    </span>
+                                </td>
+                                <td class="p-4 text-slate-400">
+                                    {ctrl.data.notes}
+                                </td>
+                            </tr>
+                        ))
+                    }
+                </tbody>
+            </table>
+        </div>
+    </main>
+</Layout>

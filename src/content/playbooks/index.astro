@@ -1,0 +1,50 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/BaseLayout.astro";
+
+const playbooks = await getCollection("playbooks");
+---
+
+<Layout title="IR Playbooks | SOC Portal">
+    <main class="max-w-4xl mx-auto px-6 py-12 text-slate-300">
+        <h1
+            class="text-3xl font-bold text-white border-b border-slate-700 pb-4 mb-8"
+        >
+            Incident Response Playbooks
+        </h1>
+        <div class="grid gap-4">
+            {
+                playbooks.map((book) => (
+                    <a
+                        href={`${import.meta.env.BASE_URL}/playbooks/${book.id}`}
+                        class="block p-4 border border-slate-700 hover:border-blue-500 bg-slate-900"
+                    >
+                        <div class="flex justify-between items-center mb-2">
+                            <h2 class="text-xl font-semibold text-white">
+                                {book.data.title}
+                            </h2>
+                            <span
+                                class={`px-2 py-1 text-xs font-bold uppercase ${
+                                    book.data.severity === "Critical"
+                                        ? "bg-red-900 text-red-200"
+                                        : book.data.severity === "High"
+                                          ? "bg-orange-900 text-orange-200"
+                                          : "bg-slate-700 text-slate-300"
+                                }`}
+                            >
+                                {book.data.severity}
+                            </span>
+                        </div>
+                        <p class="text-sm text-slate-400">
+                            {book.data.description}
+                        </p>
+                        <div class="text-xs text-slate-500 mt-4">
+                            Last Updated:{" "}
+                            {book.data.lastUpdated.toISOString().split("T")[0]}
+                        </div>
+                    </a>
+                ))
+            }
+        </div>
+    </main>
+</Layout>
