@@ -1,0 +1,58 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/BaseLayout.astro";
+
+// 1. Tell Astro which routes to generate based on the markdown files
+export async function getStaticPaths() {
+    const playbooks = await getCollection("playbooks");
+
+    return playbooks.map((book) => ({
+        params: { id: book.id }, // Maps the URL to the markdown filename
+        props: { book },
+    }));
+}
+
+// 2. Extract the specific playbook being generated
+const { book } = Astro.props;
+
+// 3. Render the markdown into HTML
+const { Content } = await render(book);
+---
+
+<Layout title={`${book.data.title} | SOC Portal`}>
+    <article class="max-w-4xl mx-auto px-6 py-12">
+        <!-- Playbook Header -->
+        <div class="mb-8 border-b border-slate-700 pb-6">
+            <div class="flex justify-between items-center mb-4">
+                <h1 class="text-4xl font-bold text-white">{book.data.title}</h1>
+                <span
+                    class={`px-3 py-1 text-sm font-bold uppercase ${
+                        book.data.severity === "Critical"
+                            ? "bg-red-900 border border-red-500 text-red-200"
+                            : book.data.severity === "High"
+                              ? "bg-orange-900 border border-orange-500 text-orange-200"
+                              : "bg-slate-700 border border-slate-500 text-slate-300"
+                    }`}
+                >
+                    {book.data.severity}
+                </span>
+            </div>
+            <p class="text-lg text-slate-400">{book.data.description}</p>
+
+            <!-- Metadata row -->
+            <div class="mt-4 flex gap-6 text-sm text-slate-500 font-mono">
+                <span>Author: {book.data.author}</span>
+                <span
+                    >Updated: {
+                        book.data.lastUpdated.toISOString().split("T")[0]
+                    }</span
+                >
+            </div>
+        </div>
+
+        <!-- Rendered Markdown Content -->
+        <div class="prose prose-invert prose-slate max-w-none">
+            <Content />
+        </div>
+    </article>
+</Layout>
