@@ -1,6 +1,6 @@
 {
-    "controlId": "CIS 1.1",
-    "title": "Establish and Maintain Detailed Enterprise Asset Inventory",
-    "implementationStatus": "Partial",
-    "notes": "CrowdStrike covers endpoints, but IoT/OT device visibility remains a blind spot."
+    "controlId": "CIS 5.1",
+    "title": "Establish and Maintain an Account Inventory",
+    "implementationStatus": "Implemented",
+    "notes": "Fully automated via Okta and Active Directory syncing. Orphaned accounts are purged every 30 days."
 }
