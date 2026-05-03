@@ -1,0 +1,7 @@
+{
+    "toolName": "Splunk Enterprise Security",
+    "category": "SIEM",
+    "status": "Active",
+    "url": "https://splunk.internal.local",
+    "internalOwner": "SOC Analytics Team"
+}

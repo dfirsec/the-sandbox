@@ -1,0 +1,6 @@
+{
+    "controlId": "CIS 17.1",
+    "title": "Designate Personnel to Manage Incident Handling",
+    "implementationStatus": "Implemented",
+    "notes": "SOC roster is updated monthly. On-call rotation is managed via PagerDuty."
+}

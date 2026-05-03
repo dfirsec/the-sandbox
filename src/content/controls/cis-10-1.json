@@ -1,0 +1,6 @@
+{
+    "controlId": "CIS 10.1",
+    "title": "Deploy Anti-Malware Software",
+    "implementationStatus": "Implemented",
+    "notes": "CrowdStrike Falcon deployed to 98% of Windows/macOS fleet. Linux servers require verification."
+}

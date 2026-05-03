@@ -1,0 +1,6 @@
+{
+    "controlId": "CIS 8.2",
+    "title": "Collect Audit Logs",
+    "implementationStatus": "Partial",
+    "notes": "Endpoint and firewall logs are shipping to Splunk, but O365 logs are currently failing to ingest."
+}

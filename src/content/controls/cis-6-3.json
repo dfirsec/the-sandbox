@@ -1,0 +1,6 @@
+{
+    "controlId": "CIS 6.3",
+    "title": "Require MFA for All Administrative Access",
+    "implementationStatus": "Implemented",
+    "notes": "Duo Security MFA is enforced for all domain admins, firewall portals, and hypervisor access."
+}

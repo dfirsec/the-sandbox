@@ -1,0 +1,6 @@
+{
+    "controlId": "CIS 1.1",
+    "title": "Establish and Maintain Detailed Enterprise Asset Inventory",
+    "implementationStatus": "Partial",
+    "notes": "CrowdStrike covers endpoints, but IoT/OT device visibility remains a blind spot."
+}
