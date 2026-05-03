@@ -2,6 +2,8 @@
 
 This repository is a high-availability, zero-attack-surface security portal deployed via GitHub Pages. Critical security documentation remains accessible even when primary internal systems are offline.
 
+**Live portal**: https://dfirsec.github.io/the-sandbox/
+
 ## 🚀 Key Components
 
 * **Incident Response Playbooks**: Markdown-based runbooks covering 14 threat scenarios including Ransomware, BEC, Phishing, Data Exfiltration, Insider Threat, Privilege Escalation, and more.
