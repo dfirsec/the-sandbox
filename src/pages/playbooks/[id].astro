@@ -56,6 +56,21 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
                     Reset progress
                 </button>
             </div>
+
+            <!-- Progress indicator — shown only after JS initialises checkboxes -->
+            <div id="progress-bar-wrap" class="hidden print:hidden mt-5">
+                <div class="flex items-center justify-between mb-1.5">
+                    <span class="text-xs font-mono text-slate-400">Response progress</span>
+                    <span id="progress-label" class="text-xs font-mono text-emerald-400">0 / 0 steps</span>
+                </div>
+                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                    <div
+                        id="progress-fill"
+                        class="h-full bg-emerald-500 rounded-full transition-all duration-300"
+                        style="width: 0%"
+                    ></div>
+                </div>
+            </div>
         </div>
 
         <div class="prose prose-invert prose-slate max-w-none" id="playbook-content">
@@ -78,15 +93,35 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     const key = `checklist:${location.pathname}`;
     const state: Record<number, boolean> = JSON.parse(localStorage.getItem(key) || '{}');
     const resetBtn = document.getElementById('reset-btn') as HTMLButtonElement | null;
+    const progressWrap = document.getElementById('progress-bar-wrap') as HTMLElement | null;
+    const progressFill = document.getElementById('progress-fill') as HTMLElement | null;
+    const progressLabel = document.getElementById('progress-label') as HTMLElement | null;
+    let totalSteps = 0;
 
     function saveState() {
         localStorage.setItem(key, JSON.stringify(state));
     }
 
-    function syncResetBtn() {
-        if (!resetBtn) return;
-        const anyChecked = Object.values(state).some(Boolean);
-        resetBtn.classList.toggle('hidden', !anyChecked);
+    function syncUI() {
+        const completed = Object.values(state).filter(Boolean).length;
+
+        // Reset button
+        if (resetBtn) resetBtn.classList.toggle('hidden', completed === 0);
+
+        // Progress bar
+        if (progressWrap && progressFill && progressLabel && totalSteps > 0) {
+            const pct = Math.round((completed / totalSteps) * 100);
+            progressFill.style.width = `${pct}%`;
+            progressLabel.textContent = `${completed} / ${totalSteps} steps`;
+
+            // Colour shift: green → emerald when complete
+            if (pct === 100) {
+                progressFill.style.backgroundColor = '#34d399'; // emerald-400
+                progressLabel.textContent = '✓ All steps complete';
+            } else {
+                progressFill.style.backgroundColor = '#10b981'; // emerald-500
+            }
+        }
     }
 
     function applyChecked(li: HTMLElement, checked: boolean) {
@@ -124,7 +159,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
                 state[index] = cb.checked;
                 applyChecked(li, cb.checked);
                 saveState();
-                syncResetBtn();
+                syncUI();
             });
 
             li.prepend(cb);
@@ -132,7 +167,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         });
     });
 
-    syncResetBtn();
+    totalSteps = globalIndex;
+
+    // Reveal progress bar now that we know totalSteps
+    if (progressWrap && totalSteps > 0) progressWrap.classList.remove('hidden');
+
+    syncUI();
 
     resetBtn?.addEventListener('click', () => {
         prose.querySelectorAll<HTMLInputElement>('ol > li > input[type="checkbox"]').forEach((cb, i) => {
@@ -141,7 +181,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
             applyChecked(cb.closest('li') as HTMLElement, false);
         });
         saveState();
-        syncResetBtn();
+        syncUI();
     });
 })();
 </script>
