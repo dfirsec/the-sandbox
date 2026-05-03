@@ -1,0 +1,6 @@
+{
+  "title": "the-sandbox",
+  "description": "A developer playground built with Astro v6, React Islands, Tailwind CSS, and Content Collections.",
+  "repo": "https://github.com/dfirsec/the-sandbox",
+  "tags": ["Astro", "React", "Tailwind CSS"]
+}

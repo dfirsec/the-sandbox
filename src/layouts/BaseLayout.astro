@@ -1,0 +1,48 @@
+---
+import '../styles/global.css';
+import ThemeToggle from '../components/ThemeToggle';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'The Sandbox — a developer playground built with Astro.' } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+    <title>{title} · the-sandbox</title>
+  </head>
+  <body class="min-h-screen bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 transition-colors">
+    <header class="sticky top-0 z-10 border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-950/80 backdrop-blur">
+      <nav class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+        <a href={base} class="font-bold text-lg tracking-tight hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+          🧪 the-sandbox
+        </a>
+        <div class="flex items-center gap-6">
+          <a href={`${base}/blog`} class="text-sm font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Blog</a>
+          <a href={`${base}/portfolio`} class="text-sm font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Portfolio</a>
+          <ThemeToggle client:load />
+        </div>
+      </nav>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-10">
+      <slot />
+    </main>
+
+    <footer class="border-t border-gray-200 dark:border-gray-800 mt-16">
+      <div class="max-w-5xl mx-auto px-4 py-6 text-center text-sm text-gray-500 dark:text-gray-400">
+        Built with <a href="https://astro.build" class="underline hover:text-indigo-600 dark:hover:text-indigo-400">Astro</a>
+        &amp; <a href="https://tailwindcss.com" class="underline hover:text-indigo-600 dark:hover:text-indigo-400">Tailwind CSS</a>
+      </div>
+    </footer>
+  </body>
+</html>
