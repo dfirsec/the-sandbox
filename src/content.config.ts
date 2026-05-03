@@ -1,24 +1,40 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-const blog = defineCollection({
-  // This tells Astro exactly where to look and what files to include
-  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/blog" }),
+// 1. Incident Response Playbooks (Markdown)
+const playbooks = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/playbooks" }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    pubDate: z.coerce.date(), // Use coerce to handle string-to-date conversion
-    tags: z.array(z.string()).optional(),
+    severity: z.enum(['Low', 'Medium', 'High', 'Critical']),
+    lastUpdated: z.coerce.date(),
+    author: z.string().default('SecOps Team'),
   }),
 });
 
-const portfolio = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.json', base: "./src/content/portfolio" }),
+// 2. Architecture & Tooling Registry (JSON)
+const registry = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.json', base: "./src/content/registry" }),
   schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    // Add other fields based on your JSON files here
+    toolName: z.string(),
+    category: z.string(), // e.g., "EDR", "SIEM", "Firewall"
+    status: z.enum(['Active', 'Under Review', 'Deprecated']),
+    url: z.string().url().optional(),
+    internalOwner: z.string(),
   }),
 });
 
-export const collections = { blog, portfolio };
+// 3. CIS Controls & Compliance (JSON)
+const controls = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.json', base: "./src/content/controls" }),
+  schema: z.object({
+    controlId: z.string(), // e.g., "CIS 4.1"
+    title: z.string(),
+    implementationStatus: z.enum(['Implemented', 'Partial', 'Not Started', 'N/A']),
+    evidenceLink: z.string().optional(),
+    notes: z.string(),
+  }),
+});
+
+export const collections = { playbooks, registry, controls };

@@ -1,0 +1,7 @@
+{
+    "toolName": "CrowdStrike Falcon",
+    "category": "EDR",
+    "status": "Active",
+    "url": "https://falcon.crowdstrike.com",
+    "internalOwner": "Endpoint Security Team"
+}

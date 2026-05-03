@@ -1,0 +1,6 @@
+{
+    "controlId": "CIS 4.1",
+    "title": "Establish and Maintain a Secure Configuration Process",
+    "implementationStatus": "Partial",
+    "notes": "Server baseline is automated, but workstations require manual verification."
+}
