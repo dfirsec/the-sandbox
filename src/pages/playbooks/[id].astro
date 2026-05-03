@@ -44,13 +44,21 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
                 </span>
             </div>
             <p class="text-lg text-slate-400">{book.data.description}</p>
-            <div class="mt-4 flex gap-6 text-sm text-slate-500 font-mono">
-                <span>Author: {book.data.author}</span>
-                <span>Updated: {book.data.lastUpdated.toISOString().split("T")[0]}</span>
+            <div class="mt-4 flex items-center justify-between">
+                <div class="flex gap-6 text-sm text-slate-500 font-mono">
+                    <span>Author: {book.data.author}</span>
+                    <span>Updated: {book.data.lastUpdated.toISOString().split("T")[0]}</span>
+                </div>
+                <button
+                    id="reset-btn"
+                    class="hidden print:hidden text-xs font-mono text-slate-500 hover:text-red-400 border border-slate-700 hover:border-red-800 px-3 py-1 transition-colors"
+                >
+                    Reset progress
+                </button>
             </div>
         </div>
 
-        <div class="prose prose-invert prose-slate max-w-none">
+        <div class="prose prose-invert prose-slate max-w-none" id="playbook-content">
             <Content />
         </div>
 
@@ -64,3 +72,76 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         </div>
     </article>
 </Layout>
+
+<script>
+(function () {
+    const key = `checklist:${location.pathname}`;
+    const state: Record<number, boolean> = JSON.parse(localStorage.getItem(key) || '{}');
+    const resetBtn = document.getElementById('reset-btn') as HTMLButtonElement | null;
+
+    function saveState() {
+        localStorage.setItem(key, JSON.stringify(state));
+    }
+
+    function syncResetBtn() {
+        if (!resetBtn) return;
+        const anyChecked = Object.values(state).some(Boolean);
+        resetBtn.classList.toggle('hidden', !anyChecked);
+    }
+
+    function applyChecked(li: HTMLElement, checked: boolean) {
+        li.style.opacity = checked ? '0.45' : '1';
+        li.style.textDecoration = checked ? 'line-through' : 'none';
+        li.style.textDecorationColor = '#475569';
+    }
+
+    const prose = document.getElementById('playbook-content');
+    if (!prose) return;
+
+    const ols = prose.querySelectorAll<HTMLOListElement>('ol');
+    let globalIndex = 0;
+
+    ols.forEach(ol => {
+        ol.style.listStyle = 'none';
+        ol.style.paddingLeft = '0';
+
+        ol.querySelectorAll<HTMLLIElement>(':scope > li').forEach(li => {
+            const index = globalIndex++;
+            const checked = !!state[index];
+
+            li.style.display = 'flex';
+            li.style.alignItems = 'flex-start';
+            li.style.gap = '0.625rem';
+            li.style.marginBottom = '0.75rem';
+
+            const cb = document.createElement('input');
+            cb.type = 'checkbox';
+            cb.checked = checked;
+            cb.style.cssText = 'margin-top:0.3rem;width:1rem;height:1rem;flex-shrink:0;accent-color:#10b981;cursor:pointer';
+            cb.setAttribute('aria-label', `Mark step ${index + 1} complete`);
+
+            cb.addEventListener('change', () => {
+                state[index] = cb.checked;
+                applyChecked(li, cb.checked);
+                saveState();
+                syncResetBtn();
+            });
+
+            li.prepend(cb);
+            applyChecked(li, checked);
+        });
+    });
+
+    syncResetBtn();
+
+    resetBtn?.addEventListener('click', () => {
+        prose.querySelectorAll<HTMLInputElement>('ol > li > input[type="checkbox"]').forEach((cb, i) => {
+            cb.checked = false;
+            state[i] = false;
+            applyChecked(cb.closest('li') as HTMLElement, false);
+        });
+        saveState();
+        syncResetBtn();
+    });
+})();
+</script>
