@@ -4,7 +4,10 @@ import Layout from "../../layouts/BaseLayout.astro";
 
 // Sort controls alphabetically/numerically by their ID
 const controls = (await getCollection("controls")).sort((a, b) =>
-    a.data.controlId.localeCompare(b.data.controlId),
+    a.data.controlId.localeCompare(b.data.controlId, undefined, {
+        numeric: true,
+        sensitivity: "base",
+    }),
 );
 ---
 
