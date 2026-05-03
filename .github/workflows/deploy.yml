@@ -37,6 +37,8 @@ jobs:
 
       - name: Build with Astro
         run: npm run build
+        env:
+          ASTRO_TELEMETRY_DISABLED: 1
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
