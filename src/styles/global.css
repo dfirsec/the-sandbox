@@ -1,1 +1,29 @@
 @import "tailwindcss";
+
+@theme {
+    /* High-contrast dark theme palette */
+    --color-sandbox-bg: #020617;
+    /* Deep midnight blue */
+    --color-sandbox-accent: #10b981;
+    /* Emerald green (The "Console" look) */
+    --color-sandbox-text: #f1f5f9;
+    /* Clean slate white */
+    --color-sandbox-border: #1e293b;
+    /* Subtle slate border */
+
+    /* Terminal-style font stack */
+    --font-mono: "Fira Code", "JetBrains Mono", ui-monospace, monospace;
+}
+
+@layer base {
+    body {
+        @apply bg-sandbox-bg text-sandbox-text font-sans;
+    }
+
+    h1,
+    h2,
+    h3,
+    code {
+        @apply font-mono;
+    }
+}
