@@ -1,6 +1,6 @@
 # 🛡️ SOC Operations Portal: The Sandbox
 
-This repository is a high-availability, zero-attack-surface security portal deployed via GitHub Pages. Critical security documentation remains accessible even when primary internal systems are offline.
+This repository is a lightweight, low-attack-surface security portal hosted on GitHub Pages. Because it has no internal infrastructure dependencies, it remains accessible during internal system outages as long as internet connectivity is available.
 
 **Live portal**: https://dfirsec.github.io/the-sandbox/
 
